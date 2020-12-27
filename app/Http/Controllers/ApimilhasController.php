@@ -94,7 +94,7 @@ class ApimilhasController extends Controller
             $finalResult['cheapestGroup'] = $groups[1]['uniqueId'];
         }
 
-
+        return $finalResult;
         
           
           
