@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 class ApimilhasController extends Controller
 {
+    /**
+     * Index action.
+     * @return JSON
+     */
     public function index()
     {
         $contents = json_decode(static::get_page('http://prova.123milhas.net/api/flights'), true);
@@ -94,17 +98,14 @@ class ApimilhasController extends Controller
             $finalResult['cheapestGroup'] = $groups[1]['uniqueId'];
         }
 
-        return $finalResult;
-        
-          
-          
-        //dd(json_encode($finalResult));
-        echo '<pre>';var_dump(json_encode($finalResult));exit;
-        
-        
-        
+        return $finalResult;        
     }
 
+    /**
+     * Get content from URL
+     * @param string $url
+     * @return JSON
+     */
     public static function get_page($url)
     {
         $curl = curl_init();
