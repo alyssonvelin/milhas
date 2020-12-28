@@ -28,7 +28,7 @@ class ApimilhasController extends Controller
                 if($value['inbound'])
                     $inbounds[$value['fare']][] = $value;
             }
-            //echo '<pre>';var_dump($outbounds,$inbounds);exit;
+            
             if($types)
             {
                 $groups = array();
@@ -64,6 +64,13 @@ class ApimilhasController extends Controller
                                 $groups[$idGroup]['totalPrice'] = $value['tot'];
                                 $groups[$idGroup]['outbound'] = array();
                                 $groups[$idGroup]['inbound'] = array();
+                                if($idGroup > 1)
+                                {
+                                    if(!in_array($value['idOut'],$groups[$idGroup]['outbound']))
+                                        $groups[$idGroup]['outbound'][] = $value['idOut'];
+                                    if(!in_array($value['idIn'],$groups[$idGroup]['inbound']))
+                                        $groups[$idGroup]['inbound'][] = $value['idIn'];
+                                }
                             }
                             else if($tot > 0 && $tot == $value['tot'])
                             {
@@ -84,21 +91,25 @@ class ApimilhasController extends Controller
                                     $groups[$idGroup]['outbound'][] = $value['idOut'];
                                 if(!in_array($value['idIn'],$groups[$idGroup]['inbound']))
                                     $groups[$idGroup]['inbound'][] = $value['idIn'];
-                                
                             }
                         }
                     }
                 }
             }
             $finalResult['flights'] = $contents;
-            $finalResult['groups'] = $groups;
+            $finalResult['groups'] = [$groups];
             $finalResult['totalGroups'] = count($groups);
+
+            //não entendi este item pedi ajuda para a Brenda aguardando resposta
             $finalResult['totalFlights'] = 0;
+            
+            //os dois valores abaixo estão diretamente atrelados ao primeiro grupo 
+            //já que foi realizada ordenação dos grupos por valor ascendente
             $finalResult['cheapestPrice'] = $groups[1]['totalPrice'];
             $finalResult['cheapestGroup'] = $groups[1]['uniqueId'];
         }
-
-        return $finalResult;        
+        
+        return $finalResult;
     }
 
     /**
