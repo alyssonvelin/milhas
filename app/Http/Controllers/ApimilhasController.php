@@ -33,6 +33,7 @@ class ApimilhasController extends Controller
             {
                 $groups = array();
                 $idGroup = 1;
+                $finalGroups = array();
                 foreach($types as $valueType)
                 {
                     $tot = 0;
@@ -95,12 +96,13 @@ class ApimilhasController extends Controller
                         }
                     }
                 }
+                if($groups)
+                {
+                    foreach($groups as $value)
+                        $finalGroups[] = $value;
+                }
             }
-            if($groups)
-            {
-                foreach($groups as $value)
-                    $finalGroups[] = $value;
-            }
+            
 
             $finalResult['flights'] = $contents;
             $finalResult['groups'] = $finalGroups;
