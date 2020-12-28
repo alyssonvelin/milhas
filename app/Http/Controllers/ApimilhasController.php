@@ -107,9 +107,7 @@ class ApimilhasController extends Controller
             $finalResult['flights'] = $contents;
             $finalResult['groups'] = $finalGroups;
             $finalResult['totalGroups'] = count($groups);
-
-            //não entendi este item pedi ajuda para a Brenda aguardando resposta
-            $finalResult['totalFlights'] = 0;
+            $finalResult['totalFlights'] = count($contents);
 
             //os dois valores abaixo estão diretamente atrelados ao primeiro grupo 
             //já que foi realizada ordenação dos grupos por valor ascendente
