@@ -96,13 +96,19 @@ class ApimilhasController extends Controller
                     }
                 }
             }
+            if($groups)
+            {
+                foreach($groups as $value)
+                    $finalGroups[] = $value;
+            }
+
             $finalResult['flights'] = $contents;
-            $finalResult['groups'] = [$groups];
+            $finalResult['groups'] = $finalGroups;
             $finalResult['totalGroups'] = count($groups);
 
             //não entendi este item pedi ajuda para a Brenda aguardando resposta
             $finalResult['totalFlights'] = 0;
-            
+
             //os dois valores abaixo estão diretamente atrelados ao primeiro grupo 
             //já que foi realizada ordenação dos grupos por valor ascendente
             $finalResult['cheapestPrice'] = $groups[1]['totalPrice'];
