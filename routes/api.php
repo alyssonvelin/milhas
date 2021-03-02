@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
-    ApimilhasController
+    ApiemprestaController
 };
 
 /*
@@ -21,5 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/milhas',[ApimilhasController::class,'index']);
+Route::get('/emprestainstituicoes',[ApiemprestaController::class,'instituicoes'])->name('empresta.instituicoes');
+Route::get('/emprestaconvenios',[ApiemprestaController::class,'convenios'])->name('empresta.convenios');
+Route::post('/empresta',[ApiemprestaController::class,'index'])->name('empresta.index');
 
