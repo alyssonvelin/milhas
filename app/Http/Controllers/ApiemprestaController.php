@@ -64,7 +64,7 @@ class ApiemprestaController extends Controller
     public function instituicoes()
     {
         $obj = new Apiempresta();
-        return json_decode($obj->getFile('instituicoes.json',$this->getPath()));
+        return json_decode($obj->getFile('instituicoes.json',storage_path()));
     }
 
     /**
@@ -74,7 +74,7 @@ class ApiemprestaController extends Controller
     public function convenios()
     {
         $obj = new Apiempresta();
-        return json_decode($obj->getFile('convenios.json',$this->getPath()));
+        return json_decode($obj->getFile('convenios.json',storage_path()));
     }
 
     /**
@@ -92,15 +92,6 @@ class ApiemprestaController extends Controller
     }
 
     /**
-     * Return path source files
-     * @return string
-     */
-    public function getPath()
-    {
-        return "/app/public/empresta/";
-    }
-
-    /**
      * Verify/format filters
      * @param object $obj
      * @param array $data
@@ -108,7 +99,7 @@ class ApiemprestaController extends Controller
      */
     public function formatRequired($obj,$data)
     {
-        $tax = json_decode($obj->getFile('taxas_instituicoes.json',$this->getPath()),true);
+        $tax = json_decode($obj->getFile('taxas_instituicoes.json',storage_path()),true);
         if(array_key_exists('instituicoes',$data))
         {
             foreach($data['instituicoes'] as $key => $value)
@@ -117,7 +108,7 @@ class ApiemprestaController extends Controller
             $inst = $data['instituicoes'];
         }
         else
-            $inst = json_decode($obj->getFile('instituicoes.json',$this->getPath()),true);
+            $inst = json_decode($obj->getFile('instituicoes.json',storage_path()),true);
 
         $conv = false;
         if(array_key_exists('convenios',$data))
